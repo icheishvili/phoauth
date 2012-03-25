@@ -1,0 +1,52 @@
+{
+    "consumers":[
+        {
+            "name":"example app",
+            "key":"92429d82a41e930486c6de5ebda9602d55c39986",
+            "secret":"e9d71f5ee7c92d6dc9e92ffdad17b8bd49418f98"
+        },
+        {
+            "name":"app 2",
+            "key":"395df8f7c51f007019cb30201c49e884b46b92fa",
+            "secret":"95cb0bfd2977c761298d9624e4b4d4c72a39974a"
+        }
+    ],
+    "nonces":[
+        {
+            "value":"4f6ed7d6885b5",
+            "timestamp":1332664278
+        },
+        {
+            "value":"4f6ed7d68cc0d",
+            "timestamp":1332664278
+        },
+        {
+            "value":"4f6ed7d68e215",
+            "timestamp":1332664278
+        }
+    ],
+    "tokens":[
+        {
+            "type":"request",
+            "key":"b64008b5ba153ae744e77402516ef31e227fb9e5",
+            "secret":"168068a37d76e1789c1a60cda89d5a2f2a9c877c",
+            "consumer":"92429d82a41e930486c6de5ebda9602d55c39986"
+        },
+        {
+            "type":"access",
+            "key":"a85117d560d5df701a9d4b1c068e1cd25b30d31a",
+            "secret":"b43a833181e3e9d24978f614da4befc5f5370a2d",
+            "consumer":"92429d82a41e930486c6de5ebda9602d55c39986"
+        }
+    ],
+    "users":[
+        {
+            "username":"user1",
+            "password":"password1"
+        },
+        {
+            "username":"user2",
+            "password":"password2"
+        }
+    ]
+}
