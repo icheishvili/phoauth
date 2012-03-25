@@ -18,6 +18,7 @@ Some libraries...
 Check this out:
 
 ```php
+<?php
 use PhoAuth\Utils;
 
 $signer = new PhoAuth\Signer(
