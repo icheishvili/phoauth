@@ -35,7 +35,7 @@ echo $signer->getSignature();
 
 The first thing to notice is that all of the HTTP information that
 PhoAuth needs is passed in. CS 101 has these concepts about
-encapsulation and the like--this is an example of that.
+encapsulation and separation of concerns--this is an example of that.
 
 The second thing to notice is how easily Utils lets most people work
 with most PHP set ups. At the same time, due to PhoAuth's design not
