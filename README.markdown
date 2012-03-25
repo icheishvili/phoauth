@@ -1,6 +1,8 @@
 PhoAuth
 =======
 
+[![Build Status](https://secure.travis-ci.org/icheishvili/phoauth.png?branch=master)](http://travis-ci.org/icheishvili/phoauth)
+
 OAuth sucks. The goal of this library is to make it stop sucking. It's
 for PHP 5.3+. It is licensed under the
 [New BSD License](http://www.opensource.org/licenses/bsd-license.php).
