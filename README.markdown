@@ -59,3 +59,11 @@ A few other niceties:
     use-case-specific abstractions
   - Exceptions are specific and detailed
   - Everything is covered by unit tests
+
+
+
+Even Cats Like It!
+------------------
+![Psyched Cat](https://github.com/icheishvili/phoauth/raw/master/static/psyched-cat.jpg)
+
+The feline above has just spotted PhoAuth and is shocked by how awesome it is.
