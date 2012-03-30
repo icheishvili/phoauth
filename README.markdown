@@ -1,6 +1,8 @@
 PhoAuth
 =======
 
+[![Build Status](https://secure.travis-ci.org/icheishvili/phoauth.png?branch=master)](http://travis-ci.org/icheishvili/phoauth)
+
 OAuth sucks. The goal of this library is to make it stop sucking. It's
 for PHP 5.3+. It is licensed under the
 [New BSD License](http://www.opensource.org/licenses/bsd-license.php).
@@ -35,7 +37,7 @@ echo $signer->getSignature();
 
 The first thing to notice is that all of the HTTP information that
 PhoAuth needs is passed in. CS 101 has these concepts about
-encapsulation and the like--this is an example of that.
+encapsulation and separation of concerns--this is an example of that.
 
 The second thing to notice is how easily Utils lets most people work
 with most PHP set ups. At the same time, due to PhoAuth's design not
@@ -57,3 +59,11 @@ A few other niceties:
     use-case-specific abstractions
   - Exceptions are specific and detailed
   - Everything is covered by unit tests
+
+
+
+Even Cats Like It!
+------------------
+![Psyched Cat](https://github.com/icheishvili/phoauth/raw/master/static/psyched-cat.jpg)
+
+The feline above has just spotted PhoAuth and is shocked by how awesome it is.
