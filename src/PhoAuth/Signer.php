@@ -1,5 +1,7 @@
 <?php namespace PhoAuth;
 
+use PhoAuth\Utils;
+
 class Signer
 {
     /**
@@ -121,7 +123,7 @@ class Signer
         $normalizedHost = reset((explode(':', $host)));
         $parsedUri      = parse_url($uri);
         if (isset($parsedUri['query'])) {
-            parse_str($parsedUri['query'], $parsedQuery);
+            $parsedQuery = Utils::parseQuery($parsedUri['query']);
         } else {
             $parsedQuery = array();
         }
@@ -140,7 +142,7 @@ class Signer
             if ($key == 'content-type' &&
                 $value == 'application/x-www-form-urlencoded'
             ) {
-                parse_str($this->getBody(), $bodyParams);
+                $bodyParams = Utils::parseQuery($this->getBody());
                 $this->_params = array_merge($bodyParams, $this->getParams());
             } elseif ($key == 'authorization') {
                 $this->_consumeAuthHeader(trim($value));

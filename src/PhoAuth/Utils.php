@@ -105,4 +105,35 @@ class Utils
     {
         return file_get_contents('php://input');
     }
+
+    /**
+     * Helper function to correctly parse a query string. This is
+     * something that PHP does not implement correctly (the correct
+     * behavior is to build lists of values for the same key instead
+     * of overriding the previous value).
+     *
+     * @param string $input
+     *
+     * @return array
+     */
+    public static function parseQuery($input)
+    {
+        $parts = explode('&', $input);
+        $params = array();
+        foreach ($parts as $part) {
+            $subparts = explode('=', $part);
+            $key = rawurldecode($subparts[0]);
+            $value = count($subparts) > 1 ? rawurldecode($subparts[1]) : '';
+            if (isset($params[$key])) {
+                if (is_array($params[$key])) {
+                    $params[$key][] = $value;
+                } else {
+                    $params[$key] = array($params[$key], $value);
+                }
+            } else {
+                $params[$key] = $value;
+            }
+        }
+        return $params;
+    }
 }
