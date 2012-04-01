@@ -122,4 +122,125 @@ class UtilsTest extends PHPUnit_Framework_TestCase
         $actual = Utils::getServerInputBody();
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Ensure that query parsing works as expected (create lists of
+     * values for duplicate parameters instead of overriding).
+     */
+    public function testParseQuery()
+    {
+        $query = 'foo=bar&foo=baz&foo&bar=foo';
+        $expected = array(
+            'foo' => array(
+                'bar',
+                'baz',
+                '',
+            ),
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseQuery($query);
+        $this->assertEquals($expected, $actual);
+
+        $query = 'foo%20foo%5B%5D=42';
+        $expected = array(
+            'foo foo[]' => 42,
+        );
+        $actual = Utils::parseQuery($query);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * Ensure that parsing header values works as expected for a
+     * multitude of edge cases.
+     */
+    public function testParseHeader()
+    {
+        $input = 'foo=bar,bar=foo';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = 'foo=bar, foo=baz, bar=foo';
+        $expected = array(
+            'bar' => 'foo',
+            'foo' => array('bar', 'baz'),
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = 'foo=bar,  bar=foo';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = 'foo=bar     ,  bar=foo';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = 'foo="bar",bar="foo"';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = 'foo="b,ar",bar="foo"';
+        $expected = array(
+            'foo' => 'b,ar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = '"foo"="bar","bar"="foo"';
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = sprintf('"foo\"%s%s"="bar","bar"="foo"', chr(92), chr(92));
+        $expected = array(
+            'foo"\\' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = sprintf('"foo"="bar\"%s%s","bar"="foo"', chr(92), chr(92));
+        $expected = array(
+            'foo' => 'bar"\\',
+            'bar' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = sprintf('"foo"="bar","bar\"%s%s"="foo"', chr(92), chr(92));
+        $expected = array(
+            'foo' => 'bar',
+            'bar"\\' => 'foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+
+        $input = sprintf('"foo"="bar","bar"="\"%s%sfoo"', chr(92), chr(92));
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => '"\\foo',
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
+    }
 }

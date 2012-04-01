@@ -133,7 +133,7 @@ class Signer
         $this->_host    = $normalizedHost;
         $this->_port    = $port;
         $this->_path    = isset($parsedUri['path']) ? $parsedUri['path'] : '/';
-        $this->_params  = array_merge($this->getParams(), $parsedQuery);
+        $this->_params  = $parsedQuery;
         $this->_headers = $headers;
         $this->_body    = $body;
 
