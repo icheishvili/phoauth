@@ -108,7 +108,7 @@ class SignerTest extends PHPUnit_Framework_TestCase
         );
 
         $expectedParams = array(
-            'a' => 'f',
+            'a' => array('b', 'f'),
             'b' => 'c',
         );
         $actualParams   = $signer->getParams();
