@@ -150,6 +150,38 @@ class UtilsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Ensure that complex param array merging scenarios all work
+     * correctly.
+     */
+    public function testMergeParams()
+    {
+        $a = array(1, 2, 3);
+        $b = array(4, 5, 6);
+        $c = 'other';
+        $expected = array(1, 2, 3, 4, 5, 6, 'other');
+        $actual = Utils::mergeParams($a, $b, $c);
+        $this->assertEquals($expected, $actual);
+
+        $a = array('bar' => 'foo');
+        $b = array('foo' => 'bar');
+        $expected = array(
+            'foo' => 'bar',
+            'bar' => 'foo',
+        );
+        $actual = Utils::mergeParams($a, $b);
+        $this->assertEquals($expected, $actual);
+
+        $a = array('foo' => 'bar', 'bar' => 'foo');
+        $b = array('foo' => 'bar');
+        $expected = array(
+            'foo' => array('bar', 'bar'),
+            'bar' => 'foo',
+        );
+        $actual = Utils::mergeParams($a, $b);
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
      * Ensure that parsing header values works as expected for a
      * multitude of edge cases.
      */

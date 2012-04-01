@@ -138,6 +138,39 @@ class Utils
     }
 
     /**
+     * Take variadic arguments and intelligently merge all of their
+     * keys.
+     *
+     * @param [array] ...
+     *
+     * @return array
+     */
+    public static function mergeParams()
+    {
+        $merged = array();
+
+        foreach (func_get_args() as $arg) {
+            if (!is_array($arg)) {
+                $merged[] = $arg;
+            } elseif (array_keys($arg) === range(0, count($arg) - 1)) {
+                foreach ($arg as $value) {
+                    $merged[] = $value;
+                }
+            } else {
+                foreach ($arg as $key => $value) {
+                    if (isset($merged[$key])) {
+                        $merged[$key] = self::mergeParams($merged[$key], $value);
+                    } else {
+                        $merged[$key] = $value;
+                    }
+                }
+            }
+        }
+
+        return $merged;
+    }
+
+    /**
      * Automaton states.
      */
     const PARSING_STATE_NONE = 0;

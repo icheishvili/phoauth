@@ -143,7 +143,7 @@ class Signer
                 $value == 'application/x-www-form-urlencoded'
             ) {
                 $bodyParams = Utils::parseQuery($this->getBody());
-                $this->_params = array_merge($bodyParams, $this->getParams());
+                $this->_params = Utils::mergeParams($bodyParams, $this->getParams());
             } elseif ($key == 'authorization') {
                 $this->_consumeAuthHeader(trim($value));
             }
@@ -280,7 +280,7 @@ class Signer
     private function _getNormalizedRequestParams()
     {
         $params       = array();
-        $mergedParams = array_merge(
+        $mergedParams = Utils::mergeParams(
             $this->getParams(),
             $this->getAuthHeaderParams()
         );
