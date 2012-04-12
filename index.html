@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>PhoAuth by icheishvili</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/icheishvili/phoauth">Fork On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/icheishvili/phoauth/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/icheishvili/phoauth/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>PhoAuth</h1>
+          <p>OAuth for PHP (that actually works)</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/icheishvili">icheishvili</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>PhoAuth</h1>
+
+<p><a href="http://travis-ci.org/icheishvili/phoauth"><img src="https://secure.travis-ci.org/icheishvili/phoauth.png?branch=master" alt="Build Status"></a></p>
+
+<p>OAuth sucks. The goal of this library is to make it stop sucking. It's
+for PHP 5.3+. It is licensed under the
+<a href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a>.</p>
+
+<p>Some libraries...</p>
+
+<ul>
+<li>Force the use of HTTP in a rigidly prescribed way</li>
+<li>Suppress errors, making debugging impossible</li>
+<li>Have weird names for parameters</li>
+<li>Are coupled to a single web server with an arc welder</li>
+<li>Only work as a client OR a server</li>
+<li>Are written by people who get paid by # of lines of code</li>
+<li>Work by funnelling gerbils through pneumatic tubes</li>
+</ul><p>Check this out:</p>
+
+<div class="highlight">
+<pre><span class="cp">&lt;?php</span>
+<span class="k">use</span> <span class="nx">PhoAuth\Utils</span><span class="p">;</span>
+
+<span class="nv">$signer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">PhoAuth\Signer</span><span class="p">(</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerScheme</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerMethod</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerHost</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerPort</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerRequestUri</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerHeaders</span><span class="p">(),</span>
+    <span class="nx">Utils</span><span class="o">::</span><span class="na">getServerInputBody</span><span class="p">());</span>
+
+<span class="k">echo</span> <span class="nv">$signer</span><span class="o">-&gt;</span><span class="na">getSignature</span><span class="p">();</span>
+</pre>
+</div>
+
+
+<p>The first thing to notice is that all of the HTTP information that
+PhoAuth needs is passed in. CS 101 has these concepts about
+encapsulation and separation of concerns--this is an example of that.</p>
+
+<p>The second thing to notice is how easily Utils lets most people work
+with most PHP set ups. At the same time, due to PhoAuth's design not
+sucking, it be used with <a href="http://gethurricane.org/">Hurricane</a>,
+<a href="http://guzzlephp.org/">Guzzle</a>, or whatever.</p>
+
+<p>While we're at it, here's how to write a
+<a href="https://github.com/icheishvili/phoauth/blob/master/examples/index.php">server</a>
+and a
+<a href="https://github.com/icheishvili/phoauth/blob/master/examples/client.php">client</a>.
+Notice the use of custom callbacks to control how data flow and
+validation works. Also notice how nothing is coupled to the client's
+actual behavior.</p>
+
+<p>A few other niceties:</p>
+
+<ul>
+<li>The implementation is clean and easy to read</li>
+<li>The code is minimal and cohesive, leaving room to build
+use-case-specific abstractions</li>
+<li>Exceptions are specific and detailed</li>
+<li>Everything is covered by unit tests</li>
+</ul><h2>Even Cats Like It!</h2>
+
+<p><img src="https://github.com/icheishvili/phoauth/raw/master/static/psyched-cat.jpg" alt="Psyched Cat"></p>
+
+<p>The feline above has just spotted PhoAuth and is shocked by how awesome it is.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+    
+  </body>
+</html>
