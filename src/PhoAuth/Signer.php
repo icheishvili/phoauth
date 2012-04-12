@@ -351,7 +351,8 @@ class Signer
             $areTimestampAndNonceValid = call_user_func(
                 $this->getTimestampAndNonceValidator(),
                 $this->getParam('oauth_timestamp'),
-                $this->getParam('oauth_nonce')
+                $this->getParam('oauth_nonce'),
+                $this->getParam('oauth_consumer_key')
             );
             if (!$areTimestampAndNonceValid) {
                 throw new ValidationException(
