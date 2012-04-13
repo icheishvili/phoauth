@@ -274,5 +274,12 @@ class UtilsTest extends PHPUnit_Framework_TestCase
         );
         $actual = Utils::parseHeader($input);
         $this->assertEquals($expected, $actual);
+
+        $input = 'foo="bar",foo="more",foo="extra"';
+        $expected = array(
+            'foo' => array('bar', 'more', 'extra'),
+        );
+        $actual = Utils::parseHeader($input);
+        $this->assertEquals($expected, $actual);
     }
 }

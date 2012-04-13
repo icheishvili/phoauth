@@ -165,14 +165,11 @@ class Signer
         }
         $value = substr($value, 6);
 
-        $parts = explode(',', $value);
-        foreach ($parts as $part) {
-            list($partKey, $partValue) = explode('=', trim($part));
-            $partValue = rawurldecode(str_replace('"', '', $partValue));
-            if ($partKey == 'realm') {
-                $this->setRealm($partValue);
+        foreach (Utils::parseHeader($value) as $headerKey => $headerValue) {
+            if ($headerKey == 'realm') {
+                $this->setRealm(rawurldecode($headerValue));
             } else {
-                $this->_authHeaderParams[$partKey] = $partValue;
+                $this->_authHeaderParams[$headerKey] = rawurldecode($headerValue);
             }
         }
     }
