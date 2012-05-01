@@ -147,6 +147,11 @@ class UtilsTest extends PHPUnit_Framework_TestCase
         );
         $actual = Utils::parseQuery($query);
         $this->assertEquals($expected, $actual);
+
+        $query = '';
+        $expected = array();
+        $actual = Utils::parseQuery($query);
+        $this->assertEquals($expected, $actual);
     }
 
     /**

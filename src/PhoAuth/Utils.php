@@ -127,10 +127,10 @@ class Utils
             if (isset($params[$key])) {
                 if (is_array($params[$key])) {
                     $params[$key][] = $value;
-                } else {
+                } elseif (strlen($key) && strlen($value)) {
                     $params[$key] = array($params[$key], $value);
                 }
-            } else {
+            } elseif (strlen($key) && strlen($value)) {
                 $params[$key] = $value;
             }
         }
