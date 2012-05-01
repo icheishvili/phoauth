@@ -202,7 +202,13 @@ class Utils
             case self::PARSING_STATE_NONE:
                 if (strlen($key) || strlen($value)) {
                     if (isset($params[$key])) {
-                        $value = array($params[$key], $value);
+                        if (is_array($params[$key])) {
+                            $params[$key][] = $value;
+                        } else {
+                            $value = array($params[$key], $value);
+                        }
+                    } else {
+                        $params[$key] = $value;
                     }
                     $params[$key] = $value;
                     $key = $value = '';
@@ -312,9 +318,14 @@ class Utils
 
         if (strlen($key) || strlen($value)) {
             if (isset($params[$key])) {
-                $value = array($params[$key], $value);
+                if (is_array($params[$key])) {
+                    $params[$key][] = $value;
+                } else {
+                    $value = array($params[$key], $value);
+                }
+            } else {
+                $params[$key] = $value;
             }
-            $params[$key] = $value;
         }
 
         return $params;
