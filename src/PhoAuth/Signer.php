@@ -140,7 +140,7 @@ class Signer
         foreach ($headers as $key => $value) {
             $key = strtolower($key);
             if ($key == 'content-type' &&
-                $value == 'application/x-www-form-urlencoded'
+                strpos($value, 'application/x-www-form-urlencoded') !== false
             ) {
                 $bodyParams = Utils::parseQuery($this->getBody());
                 $this->_params = Utils::mergeParams($bodyParams, $this->getParams());

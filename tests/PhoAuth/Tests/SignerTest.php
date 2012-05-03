@@ -116,6 +116,26 @@ class SignerTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test that a content-type header with a charset in it also works.
+     */
+    public function testBodyWithSpecifiedCharset()
+    {
+        $headers = array(
+            'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
+        );
+        $signer  = new Signer(
+            'http', 'GET', 'localhost', '80', '/?a=f', $headers, 'a=b&b=c'
+        );
+
+        $expectedParams = array(
+            'a' => array('b', 'f'),
+            'b' => 'c',
+        );
+        $actualParams   = $signer->getParams();
+        $this->assertEquals($expectedParams, $actualParams);
+    }
+
+    /**
      * Ensure that generating an OAuth signature works as expected.
      */
     public function testSignature()
