@@ -167,9 +167,9 @@ class Signer
 
         foreach (Utils::parseHeader($value) as $headerKey => $headerValue) {
             if ($headerKey == 'realm') {
-                $this->setRealm(rawurldecode($headerValue));
+                $this->setRealm(Utils::specialUrlDecode($headerValue));
             } else {
-                $this->_authHeaderParams[$headerKey] = rawurldecode($headerValue);
+                $this->_authHeaderParams[$headerKey] = Utils::specialUrlDecode($headerValue);
             }
         }
     }

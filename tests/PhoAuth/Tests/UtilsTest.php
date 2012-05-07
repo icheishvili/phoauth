@@ -287,4 +287,16 @@ class UtilsTest extends PHPUnit_Framework_TestCase
         $actual = Utils::parseHeader($input);
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test the special version of the decoding function used to deal
+     * with JS clients.
+     */
+    public function testSpecialUrlDecode()
+    {
+        $input = '%2B+%20';
+        $expected = '+  ';
+        $actual = Utils::specialUrlDecode($input);
+        $this->assertEquals($expected, $actual);
+    }
 }
