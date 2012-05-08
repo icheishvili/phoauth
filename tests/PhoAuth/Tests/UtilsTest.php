@@ -299,4 +299,18 @@ class UtilsTest extends PHPUnit_Framework_TestCase
         $actual = Utils::specialUrlDecode($input);
         $this->assertEquals($expected, $actual);
     }
+
+    /**
+     * Test that duplicate OAuth parameters are not duplicated, but regular
+     * duplicate parameters are turned into arrays.
+     */
+    public function testDuplicateParams()
+    {
+        $input1 = array('oauth_signature' => 'foo1', 'foo' => 'bar1');
+        $input2 = array('oauth_signature' => 'foo2', 'foo' => 'bar2');
+        $expected = array('oauth_signature' => 'foo1', 'foo' => array('bar1', 'bar2'));
+
+        $actual = Utils::mergeParams($input1, $input2);
+        $this->assertEquals($expected, $actual);
+    }
 }

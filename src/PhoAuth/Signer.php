@@ -285,7 +285,13 @@ class Signer
             if ($key == 'oauth_signature') {
                 continue;
             }
-            $params[] = array(rawurlencode($key), rawurlencode($value));
+            if (is_array($value)) {
+                foreach ($value as $subvalue) {
+                    $params[] = array(rawurlencode($key), rawurlencode($subvalue));
+                }
+            } else {
+                $params[] = array(rawurlencode($key), rawurlencode($value));
+            }
         }
 
         usort($params, function($a, $b)

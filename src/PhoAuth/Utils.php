@@ -172,7 +172,9 @@ class Utils
             } else {
                 foreach ($arg as $key => $value) {
                     if (isset($merged[$key])) {
-                        $merged[$key] = self::mergeParams($merged[$key], $value);
+                        if (strpos($key, 'oauth_') !== 0) {
+                            $merged[$key] = self::mergeParams($merged[$key], $value);
+                        }
                     } else {
                         $merged[$key] = $value;
                     }
