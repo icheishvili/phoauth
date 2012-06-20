@@ -14,21 +14,9 @@ class Utils
      */
     public static function getServerHeaders()
     {
-        $headers = array();
-        foreach ($_SERVER as $key => $value) {
-            if (strpos($key, 'HTTP_') !== 0) {
-                continue;
-            }
-
-            $headerName = implode('-', array_slice(array_map(function($part)
-            {
-                return ucfirst(strtolower($part));
-            }, explode('_', $key)), 1));
-
-            $headers[$headerName] = $value;
-        }
-
-        return $headers;
+        //This function fails to get the Authorization header for me, breaking the whole thing.
+        //PHP has a "get all headers" function (PHP4+), no need to reinvent the wheel
+        return getallheaders();
     }
 
     /**
