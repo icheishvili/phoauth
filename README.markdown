@@ -41,7 +41,7 @@ encapsulation and separation of concerns--this is an example of that.
 
 The second thing to notice is how easily Utils lets most people work
 with most PHP set ups. At the same time, due to PhoAuth's design not
-sucking, it be used with [Hurricane](http://gethurricane.org/),
+sucking, it can be used with [Hurricane](http://gethurricane.org/),
 [Guzzle](http://guzzlephp.org/), or whatever.
 
 While we're at it, here's how to write a
