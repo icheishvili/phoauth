@@ -134,16 +134,21 @@ class Utils
         $parts = explode('&', $input);
         $params = array();
         foreach ($parts as $part) {
-            $subparts = explode('=', $part);
-            $key = self::specialUrlDecode($subparts[0]);
-            $value = count($subparts) > 1 ? self::specialUrlDecode($subparts[1]) : '';
+            $eqPos = strpos($part, '=');
+            if ($eqPos === false) {
+                $key = self::specialUrlDecode($part);
+                $value = '';
+            } else {
+                $key = self::specialUrlDecode(substr($part, 0, $eqPos));
+                $value = self::specialUrlDecode(substr($part, $eqPos + 1));
+            }
             if (isset($params[$key])) {
                 if (is_array($params[$key])) {
                     $params[$key][] = $value;
-                } elseif (strlen($key) && strlen($value)) {
+                } elseif (strlen($key)) {
                     $params[$key] = array($params[$key], $value);
                 }
-            } elseif (strlen($key) && strlen($value)) {
+            } elseif (strlen($key)) {
                 $params[$key] = $value;
             }
         }

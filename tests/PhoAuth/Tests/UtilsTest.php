@@ -129,14 +129,15 @@ class UtilsTest extends PHPUnit_Framework_TestCase
      */
     public function testParseQuery()
     {
-        $query = 'foo=bar&foo=baz&foo&bar=foo';
+        $query = 'foo=bar&foo=baz&foo&bar=foo=foo&quux';
         $expected = array(
             'foo' => array(
                 'bar',
                 'baz',
                 '',
             ),
-            'bar' => 'foo',
+            'bar' => 'foo=foo',
+            'quux' => '',
         );
         $actual = Utils::parseQuery($query);
         $this->assertEquals($expected, $actual);
